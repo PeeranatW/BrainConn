@@ -8,6 +8,7 @@ nz = 0; % number of conditioning variables (default: 0)
 
 morder = 10; % maximum model order for model order estimation
 regmode = 'LWR'; % VAR model estimation regression mode 'LWR'(default) or 'OLS'
+acmaxlags = 1000;  % maximum auto covariance lags to calculate
 
 tstat     = 'F';     % statistical test for MVGC:  'F' for Granger's F-test (default) or 'chi2' for Geweke's chi2 test
 alpha     = 0.05;   % significance level for significance test
@@ -26,7 +27,7 @@ X = (file.data)';
 [A,SIG,E] = tsdata_to_var(X,mobic,regmode); % fit VAR model to time series, return A:VAR coefficients matrix
 % SIG:residuals covariance matrix, E:residuals time series
 
-[G,info] = var_to_autocov(A,SIG); % calculate G:autocovariance sequence for a VAR model
+[G,info] = var_to_autocov(A,SIG,acmaxlags); % calculate G:autocovariance sequence for a VAR model
 
 F = autocov_to_pwcgc(G); % calculate pairwise-conditional time-domain multivariate Granger causalities
 
