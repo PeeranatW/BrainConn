@@ -36,9 +36,9 @@ sig = significance(pval,alpha,mhtc); % statistical significance adjusted for mul
 F_sparse = F.*sig;
 
 %% Show
-F_sparse_inv = 1 - F_sparse;
+F_sparse_inv = max(max(F_sparse)) - F_sparse;
 for i = 1:numvar
-    F_sparse_inv = min(min(F_sparse_inv));
+    F_sparse_inv(i,i) = min(min(F_sparse_inv));
 end
 imagesc(F_sparse_inv)
 colormap gray
