@@ -38,5 +38,6 @@ F_sparse = F.*sig;
 F_sparse_inv = 1 - F_sparse;
 for i = 1:numvar
     F_sparse_inv = min(min(F_sparse_inv));
+end
 imagesc(F_sparse_inv)
 colormap gray
